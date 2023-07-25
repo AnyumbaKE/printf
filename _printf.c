@@ -5,43 +5,42 @@
  * Return: the length of the string.
  */
 int _printf(const char * const format, ...)
+int _printf(const char * const format, ...)
 {
 	convert_match m[] = {
-	{"%s", printf_string}, {"%c", printf_char},
-	{"%%", printf_37}, {"%i", printf_int},
-	{"%d", printf_dec}, {"%r", printf_srev},
-	{"%R", printf_rot13},
-	{"%b", printf_binary}, {"%u", printf_unsigned},
-	{"%o", printf_oct},
-	{"%x", printf_hex}, {"%X", printf_HEX},
-	{"%S", printf_exclusive_string},
-	{"%p", printf_pointer}
+		{"%s", printf_string}, {"%c", printf_char},
+		{"%%", printf_37},
+		{"%i", printf_int}, {"%d", printf_dec}, {"%r", printf_srev},
+		{"%R", printf_rot13}, {"%b", printf_bin}, {"%u", printf_unsigned},
+		{"%o", printf_oct}, {"%x", printf_hex}, {"%X", printf_HEX},
+		{"%S", printf_exclusive_string}, {"%p", printf_pointer}
 	};
 
 	va_list args;
-	int x = 0, y, len = 0;
+	int i = 0, j, len = 0;
 
 	va_start(args, format);
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 
-	while (format[x] != '\0')
+Here:
+	while (format[i] != '\0')
 	{
-		y = 13;
-		while (y >= 0)
+		j = 13;
+		while (j >= 0)
 		{
-			if (m[y].ch[0] == format[x] && m[y].ch[1] == format[x + 1])
+			if (m[j].id[0] == format[i] && m[j].id[1] == format[i + 1])
 			{
-				len += m[y].fh(args);
-				x = x + 2;
+				len += m[j].f(args);
+				i = i + 2;
+				goto Here;
 			}
-			y--;
+			j--;
 		}
-		_putchar(format[x]);
+		_putchar(format[i]);
 		len++;
-		x++;
+		i++;
 	}
 	va_end(args);
 	return (len);
 }
-
