@@ -30,9 +30,9 @@ int _printf(const char * const format, ...)
 		y = 13;
 		while (y >= 0)
 		{
-			if (m[y].id[0] == format[x] && m[y].id[1] == format[x + 1])
+			if (m[y].ch[0] == format[x] && m[y].ch[1] == format[x + 1])
 			{
-				len += m[y].f(args);
+				len += m[y].fh(args);
 				x = x + 2;
 			}
 			y--;
