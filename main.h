@@ -11,15 +11,15 @@
 
 /**
  * struct format - match the conversion specifiers for printf
- * @ch: type char pointer of the specifier
- * @fh: type pointer to function for the conversion specifier
+ * @id: type char pointer of the specifier
+ * @f: type pointer to function for the conversion specifier
  *
  */
 
 typedef struct format
 {
-	char *ch;
-	int (*fh)();
+	char *id;
+	int (*f)();
 } convert_match;
 
 int _putchar(char c);
